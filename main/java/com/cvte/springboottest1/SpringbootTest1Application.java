@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 测试远程分支修改后与本地分支合并
+ * test
  */
 @SpringBootApplication
 @MapperScan("com.cvte.springboottest1.mapper")
