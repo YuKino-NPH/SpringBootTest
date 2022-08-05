@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cvte.springboottest1.mapper.UserMapper">
+    <resultMap id="userDto" type="com.cvte.springboottest1.entity.UserEntity">
+        <result column="crt_user" property="crtUser"/>
+        <result column="crt_name" property="crtName"/>
+        <result column="crt_host" property="crtHost"/>
+        <result column="crt_time" property="crtTime"/>
+        <result column="upd_user" property="updUser"/>
+        <result column="upd_name" property="updName"/>
+        <result column="upd_host" property="updHost"/>
+        <result column="upd_time" property="updTime"/>
+        <result column="user_uuid" property="uuid"/>
+        <result column="user_name" property="name"/>
+        <result column="user_password" property="password"/>
+        <result column="user_phone" property="phone"/>
+        <result column="user_address" property="address"/>
+    </resultMap>
+    <select id="selectUserByName" resultMap="userDto">
+        SELECT crt_user,crt_name,crt_host,crt_time,upd_user,upd_name,upd_host,upd_time,user_uuid,user_name,
+               user_password,user_phone,user_address from test_user where user_name=#{name};
+    </select>
+
+    <select id="selectUserByUUID" resultMap="userDto">
+        SELECT crt_user,crt_name,crt_host,crt_time,upd_user,upd_name,upd_host,upd_time,user_uuid,user_name,
+               user_password,user_phone,user_address from test_user where user_uuid=#{uuid};
+    </select>
+
+    <select id="selectListAll" resultMap="userDto">
+        SELECT crt_user,crt_name,crt_host,crt_time,upd_user,upd_name,upd_host,upd_time,user_uuid,user_name,
+               user_password,user_phone,user_address from test_user ;
+    </select>
+    <insert id="insertUser" parameterType="com.cvte.springboottest1.entity.UserEntity">
+        INSERT into test_user(crt_user,crt_name,crt_host,crt_time,upd_user,upd_name,upd_host,upd_time,user_uuid,user_name,
+                              user_password,user_phone,user_address)
+                    values (#{crtUser},#{crtName},#{crtHost},#{crtTime},#{updUser},#{updName},#{updHost},#{updTime},#{uuid},
+                            #{name},#{password},#{phone},#{address});
+    </insert>
+    <delete id="deleteUserByUUID">
+        DELETE FROM test_user WHERE user_uuid=#{uuid};
+    </delete>
+    <update id="updateUserByUUID" parameterType="com.cvte.springboottest1.entity.UserEntity">
+        UPDATE test_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name!=null and name!=''">
+                user_name=#{name}
+            </if>
+            <if test="password!=null and password!=''">
+                user_password=#{password}
+            </if>
+            <if test="address!=null and address!=''">
+                user_address=#{address}
+            </if>
+        </trim>
+        ,upd_user=#{updUser}, upd_name=#{updName} ,upd_host=#{updHost},
+            upd_time=#{updTime}
+        WHERE user_uuid=#{uuid};
+    </update>
+
+</mapper>
