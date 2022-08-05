@@ -2,7 +2,8 @@ package com.cvte.springboottest1.enums;
 
 public enum UserResponseEnum {
     SELECT_ERROR(4000003,"用户不存在"),SAVE_ERROR(4000003,"该用户已存在"),
-    DELETE_ERROR(4000003,"用户名错误"),UPDATE_ERROR(4000003,"用户ID错误");
+    DELETE_ERROR(4000003,"用户名错误"),UPDATE_ERROR(4000003,"用户ID错误"),
+    VERIFICATION_ERROR(4000002,"数据校验失败");
     private Integer code;
     private String msg;
 

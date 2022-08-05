@@ -71,14 +71,22 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto saveUser(UserVo userVo) {
+        // 判断用户是否存在
+        UserDto userByName = getUserByName(userVo.getName());
+        if (userByName!=null)
+            return null;
+
         userVo.setUuid(UUID.randomUUID().toString());
-        userVo.setUpdTime(DateUtils.getDate());
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userVo,userEntity);
         userEntity.setCrtUser(userVo.getUuid());
         userEntity.setCrtName(userVo.getName());
         userEntity.setCrtHost(userVo.getHost());
         userEntity.setCrtTime(DateUtils.getDate());
+        userEntity.setUpdUser(userVo.getUuid());
+        userEntity.setUpdName(userVo.getName());
+        userEntity.setUpdHost(userVo.getHost());
+        userEntity.setUpdTime(DateUtils.getDate());
 
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(userVo,userDto);

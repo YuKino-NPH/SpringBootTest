@@ -1,26 +1,26 @@
-package com.cvte.springboottest1.util;
+package com.cvte.springboottest1.vo;
 
 /**
  * 返回给前端的数据信息包装类
  */
-public class R {
+public class ResultVo {
     private int code;
     private String message;
     private Object data;
 
-    public R(int code, String message) {
+    public ResultVo(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public static R success() {
-        return new R(200, "success");
+    public static ResultVo success() {
+        return new ResultVo(200, "success");
     }
 
-    public static R fail(int code, String message) {
-        return new R(code, message);
+    public static ResultVo fail(int code, String message) {
+        return new ResultVo(code, message);
     }
-    public R data(Object data){
+    public ResultVo data(Object data){
         this.setData(data);
         return this;
     }

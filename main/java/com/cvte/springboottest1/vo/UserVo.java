@@ -1,16 +1,31 @@
 package com.cvte.springboottest1.vo;
 
+import com.cvte.springboottest1.validGroup.AddGroup;
+import com.cvte.springboottest1.validGroup.UpdateGroup;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 public class UserVo {
     private String uuid;
+    @NotBlank(message = "姓名不能为空",groups = {AddGroup.class})
     private String name;
+    @NotBlank(message = "密码不能为空",groups = {AddGroup.class})
     private String password;
+    @NotBlank(message = "手机号不能为空",groups = {AddGroup.class})
+    @Length(min = 11,max = 11,message = "手机号长度错误",groups = {AddGroup.class})
     private String phone;
+    @NotBlank(message = "地址不能为空",groups ={AddGroup.class})
     private String address;
+    @NotBlank(message = "主机地址不能为空",groups = {AddGroup.class})
     private String host;
+    @NotBlank(message = "修改人UUID不能为空",groups = {UpdateGroup.class})
     private String updUser;
+    @NotBlank(message = "修改人姓名不能为空",groups = {UpdateGroup.class})
     private String updName;
+    @NotBlank(message = "修改人主机地址不能为空",groups = UpdateGroup.class)
     private String updHost;
     private Date updTime;
 
