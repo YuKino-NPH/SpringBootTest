@@ -2,9 +2,9 @@ package com.cvte.springboottest1.controller;
 
 
 import com.cvte.springboottest1.enums.UserResponseEnum;
+import com.cvte.springboottest1.exception.CustomGlobalException;
 import com.cvte.springboottest1.util.R;
 import com.cvte.springboottest1.dto.UserDto;
-import com.cvte.springboottest1.entity.UserEntity;
 import com.cvte.springboottest1.service.UserService;
 import com.cvte.springboottest1.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class UserController {
         UserDto user = userService.getUserByName(name);
         if (user != null)
             return R.success().data(user);
-        return R.fail(UserResponseEnum.SELECT_ERROR.getCode(), UserResponseEnum.SELECT_ERROR.getMsg());
+        throw new CustomGlobalException(UserResponseEnum.SELECT_ERROR.getCode(), UserResponseEnum.SELECT_ERROR.getMsg());
     }
 
     /**
@@ -38,7 +38,7 @@ public class UserController {
         List<UserDto> users = userService.getUsersAll();
         if (users != null)
             return R.success().data(users);
-        return R.fail(UserResponseEnum.SELECT_ERROR.getCode(), UserResponseEnum.SELECT_ERROR.getMsg());
+         throw new CustomGlobalException(UserResponseEnum.SELECT_ERROR.getCode(), UserResponseEnum.SELECT_ERROR.getMsg());
     }
 
     /**
@@ -52,7 +52,8 @@ public class UserController {
         UserDto userDto = userService.saveUser(user);
         if (userDto != null) {
             return R.success().data(userDto);
-        } else return R.fail(UserResponseEnum.SAVE_ERROR.getCode(), UserResponseEnum.SAVE_ERROR.getMsg());
+        }
+        throw new CustomGlobalException(UserResponseEnum.SAVE_ERROR.getCode(), UserResponseEnum.SAVE_ERROR.getMsg());
     }
 
     /**
@@ -65,7 +66,7 @@ public class UserController {
         if (code > 0) {
             return R.success();
         }
-        return R.fail(UserResponseEnum.DELETE_ERROR.getCode(), UserResponseEnum.DELETE_ERROR.getMsg());
+        throw new CustomGlobalException(UserResponseEnum.DELETE_ERROR.getCode(), UserResponseEnum.DELETE_ERROR.getMsg());
     }
 
     /**
@@ -79,7 +80,7 @@ public class UserController {
         UserDto userDtoNew = userService.updateUserByUUID(uuid, userVo);
         if (userDtoNew != null)
             return R.success().data(userDtoNew);
-        return R.fail(UserResponseEnum.UPDATE_ERROR.getCode(), UserResponseEnum.UPDATE_ERROR.getMsg());
+        throw new CustomGlobalException(UserResponseEnum.UPDATE_ERROR.getCode(), UserResponseEnum.UPDATE_ERROR.getMsg());
     }
 
 

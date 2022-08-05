@@ -28,6 +28,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByName(String name) {
         UserEntity userEntity = userMapper.selectUserByName(name);
+        if (userEntity==null)
+            return null;
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(userEntity,userDto);
         return userDto;

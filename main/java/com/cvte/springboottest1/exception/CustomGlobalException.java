@@ -1,21 +1,18 @@
-package com.cvte.springboottest1.enums;
+package com.cvte.springboottest1.exception;
 
-public enum UserResponseEnum {
-    SELECT_ERROR(4000003,"用户不存在"),SAVE_ERROR(4000003,"该用户已存在"),
-    DELETE_ERROR(4000003,"用户名错误"),UPDATE_ERROR(4000003,"用户ID错误");
+public class CustomGlobalException extends RuntimeException{
     private Integer code;
     private String msg;
 
-    UserResponseEnum(int code, String msg) {
+    public CustomGlobalException(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
-
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
@@ -26,10 +23,9 @@ public enum UserResponseEnum {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
     @Override
     public String toString() {
-        return "UserResponseEnum{" +
+        return "CustomGlobalException{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 '}';
